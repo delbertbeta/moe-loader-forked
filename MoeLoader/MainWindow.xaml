@@ -512,34 +512,34 @@
             </Setter>
         </Style>
         <Storyboard x:Key="sbNavi">
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grdNavi">
-        		<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grdNavi">
-        		<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grdNavi">
-        		<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="grdNavi">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="grdNavi">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="grdNavi">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
                 <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grdNavi">
-        		<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="-200"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="grdNavi">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="-200"/>
                 <SplineDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grdNavi">
-        		<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="grdNavi">
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="0"/>
                 <SplineDoubleKeyFrame KeyTime="0:0:0.7" Value="0"/>
                 <SplineDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
-        	</DoubleAnimationUsingKeyFrames>
+            </DoubleAnimationUsingKeyFrames>
             <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="grdNavi" Storyboard.TargetProperty="(FrameworkElement.Margin)">
                 <SplineThicknessKeyFrame KeyTime="00:00:0.6" Value="0,-35,0,0"/>
             </ThicknessAnimationUsingKeyFrames>
             <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.HorizontalAlignment)" Storyboard.TargetName="grdNavi">
-        		<DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="{x:Static HorizontalAlignment.Right}"/>
-        	</ObjectAnimationUsingKeyFrames>
-        	<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.VerticalAlignment)" Storyboard.TargetName="grdNavi">
-        		<DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="{x:Static VerticalAlignment.Top}"/>
-        	</ObjectAnimationUsingKeyFrames>
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="{x:Static HorizontalAlignment.Right}"/>
+            </ObjectAnimationUsingKeyFrames>
+            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.VerticalAlignment)" Storyboard.TargetName="grdNavi">
+                <DiscreteObjectKeyFrame KeyTime="0:0:0.6" Value="{x:Static VerticalAlignment.Top}"/>
+            </ObjectAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="showFuncBtns">
             <ThicknessAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="grdFuncBtns" Storyboard.TargetProperty="(FrameworkElement.Margin)">
@@ -558,22 +558,22 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="sbShowPageBtn">
-        	<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="btnPrev">
-        		<SplineThicknessKeyFrame KeyTime="0" Value="0,200,15,0"/>
-        		<SplineThicknessKeyFrame KeyTime="0:0:0.8" Value="0,0,15,0" KeySpline="0,0,0.5,1"/>
-        	</ThicknessAnimationUsingKeyFrames>
-        	<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="btnNext">
-        		<SplineThicknessKeyFrame KeyTime="0" Value="0,0,15,200"/>
-        		<SplineThicknessKeyFrame KeyTime="0:0:0.8" Value="0,0,15,0" KeySpline="0,0,0.5,1"/>
-        	</ThicknessAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="btnNext">
-        		<SplineDoubleKeyFrame KeyTime="0" Value="0"/>
-        		<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1" KeySpline="0,0,0.5,1"/>
-        	</DoubleAnimationUsingKeyFrames>
-        	<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="btnPrev">
-        		<SplineDoubleKeyFrame KeyTime="0" Value="0"/>
-        		<SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1" KeySpline="0,0,0.5,1"/>
-        	</DoubleAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="btnPrev">
+                <SplineThicknessKeyFrame KeyTime="0" Value="0,200,15,0"/>
+                <SplineThicknessKeyFrame KeyTime="0:0:0.8" Value="0,0,15,0" KeySpline="0,0,0.5,1"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="btnNext">
+                <SplineThicknessKeyFrame KeyTime="0" Value="0,0,15,200"/>
+                <SplineThicknessKeyFrame KeyTime="0:0:0.8" Value="0,0,15,0" KeySpline="0,0,0.5,1"/>
+            </ThicknessAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="btnNext">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1" KeySpline="0,0,0.5,1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="btnPrev">
+                <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
+                <SplineDoubleKeyFrame KeyTime="0:0:0.5" Value="1" KeySpline="0,0,0.5,1"/>
+            </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
     <Window.Triggers>
@@ -690,7 +690,9 @@
                                 </Button>
                             </Grid>
                         </Border>
+
                         <local:DownloadControl x:Name="downloadC" x:FieldModifier="internal" HorizontalAlignment="Right" Width="0" Opacity="0" AllowDrop="True"/>
+
                         <ToggleButton x:Name="toggleDownload" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,-2,0" ToolTip="显示下载面板(按住Ctrl隐藏缩略图)" Click="toggleDownload_Click" Style="{DynamicResource ToggleButtonStyle1}" RenderTransformOrigin="1,0.5" Width="25" BorderThickness="1,1,1,1">
                             <ToggleButton.RenderTransform>
                                 <TransformGroup>
@@ -723,8 +725,8 @@
                             <local:SearchControl x:Name="searchControl" HorizontalAlignment="Left" Width="200" Height="25" BorderBrush="LightGray" BorderThickness="1,1,1,1" Margin="115,0,0,0" VerticalAlignment="Top" Enteded="searchControl_Entered" />
                             <Button x:Name="btnGet"  Width="60" Height="25" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="314,0,0,0" BorderBrush="LightGray" Background="#EEEEEE" Click="Button_Click" ToolTip="获取图片列表" IsDefault="True">
                                 <Grid Width="60" Height="25">
-                                <AccessText x:Name="txtGet" Text="获取" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0"/>
-                                <Image x:Name="imgGet" Source="/Images/search.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4" />
+                                    <AccessText x:Name="txtGet" Text="获取" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25,0,0,0"/>
+                                    <Image x:Name="imgGet" Source="/Images/search.png" Stretch="None" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="4" />
                                 </Grid>
                             </Button>
                             <Rectangle x:Name="rectangle" Visibility="Hidden"  HorizontalAlignment="Right" Height="16" VerticalAlignment="Top" Width="16" Margin="0,0,0,0" Stroke="#FF7A7A7A" StrokeThickness="0" ToolTip="访问该站点" MouseLeftButtonUp="rectangle_MouseLeftButtonUp">
@@ -761,7 +763,7 @@
                         </StackPanel>
                     </Grid>
                 </Grid>
-                 <Grid x:Name="logoGrd" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0" Height="60">
+                <Grid x:Name="logoGrd" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="5,0,0,0" Height="60">
                     <Image x:Name="image" Width="120" Height="60" Stretch="None" Margin="10,10,0,0" HorizontalAlignment="Left" RenderTransformOrigin="0.50,0.50" Source="Images/logo1.png" />
                     <Image Source="Images/logo3.png" Width="160" Height="60" Margin="110,10,0,0" HorizontalAlignment="Left"/>
                 </Grid>
@@ -780,7 +782,7 @@
                 <TextBlock Text="|" Margin="28,0,0,0" FontSize="11" Style="{StaticResource glowT}" />
                 <TextBlock x:Name="txtHelp" Text="帮助" Margin="36,0,0,0" FontSize="11" TextDecorations="Underline" Style="{StaticResource glowT}" MouseDown="TextBlock_MouseDown2" Cursor="Hand"/>
             </Grid>
-            
+
             <Border HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Background="#3585e4" Height="25" Margin="-3,0,-3,-3">
                 <Grid>
                     <TextBlock Text="点击获取以取得最新图片，或使用关键词进行搜索" x:Name="statusText" Foreground="White" Margin="15,0,0,0" VerticalAlignment="Center" Style="{StaticResource glowT}" />

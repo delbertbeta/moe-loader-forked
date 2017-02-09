@@ -59,7 +59,7 @@ namespace MoeLoader
                 if (remoteVer > System.Reflection.Assembly.LoadFile(curPath + "\\SitePack.dll").GetName().Version)
                 {
                     MyWebClient web = new MyWebClient();
-                    web.DownloadFile("http://moeloader.sinaapp.com/sitepack.php", curPath + "\\SitePack.dll.new");
+                    web.DownloadFile("http://app.delbertbeta.cc/moeloader/SitePack.dll", curPath + "\\SitePack.dll.new");
                     return true;
                 }
             }

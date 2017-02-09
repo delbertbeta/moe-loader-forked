@@ -304,7 +304,7 @@ namespace MoeLoader
             try
             {
                 System.Threading.Thread.Sleep(3000);
-                System.Net.HttpWebRequest req = System.Net.WebRequest.Create("http://moeloader.sinaapp.com/update1.php") as System.Net.HttpWebRequest;
+                System.Net.HttpWebRequest req = System.Net.WebRequest.Create("http://app.delbertbeta.cc/moeloader/update") as System.Net.HttpWebRequest;
                 //System.Net.HttpWebRequest req = System.Net.WebRequest.Create("http://localhost:8888/update1") as System.Net.HttpWebRequest;
                 req.Timeout = 15000;
                 req.Method = "GET";
@@ -316,6 +316,12 @@ namespace MoeLoader
                 System.IO.StreamReader re = new System.IO.StreamReader(res.GetResponseStream(), Encoding.UTF8);
                 string content = re.ReadToEnd(); string[] parts = content.Split('|');
                 res.Close();
+
+                //part[0]:主程序版本号，part[1]更新内容
+
+
+                //广告已经失效……
+                /*
                 //////////////////////////ad//////////////
                 string ad = parts[1];
                 Dispatcher.Invoke(new VoidDel(delegate
@@ -326,6 +332,7 @@ namespace MoeLoader
                         downloadC.SetAd(ads[0], ads[1], ads[2]);
                     }
                 }));
+                */
                 /////////////////////version/////////////
                 Version remoteVer = new Version(parts[0]);
                 bool totalUpdate = false;
@@ -334,28 +341,28 @@ namespace MoeLoader
                     MyWebClient web = new MyWebClient();
                     //web.Proxy = new System.Net.WebProxy("203.208.39.104:80");
                     //int fileN = 1;
-                    string filen = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\MoeLoader_v" + remoteVer + ".7z";
+                    string filen = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\MoeLoader_v" + remoteVer + ".zip";
                     //while (System.IO.File.Exists(filen))
                     //{
                         //fileN++;
                         //filen = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\\MoeLoader_New_" + fileN + ".rar";
                     //}
 
-                    web.DownloadFile("http://moeloader.sinaapp.com/download.php", filen);
+                    web.DownloadFile("http://app.delbertbeta.cc/moeloader/moeloader.zip", filen);
 
                     Dispatcher.Invoke(new VoidDel(delegate
                     {
                         MessageBox.Show(this, "发现新版本 " + parts[0] + "，已下载至\r\n" + filen
-                            + "\r\n请稍候手工解压缩并替换程序文件\r\n\r\n本次更新内容：\r\n" + parts[2], "Moe Loader", MessageBoxButton.OK, MessageBoxImage.Information);
+                            + "\r\n请稍候手工解压缩并替换程序文件\r\n\r\n本次更新内容：\r\n" + parts[1], "Moe Loader", MessageBoxButton.OK, MessageBoxImage.Information);
                     }));
                     totalUpdate = true;
                 }
 
                 ///////////////// site pack //////////////
-                if (parts.Length > 4 && parts[4].Length > 0 && !totalUpdate)
+                if (parts.Length > 2 && parts[2].Length > 0 && !totalUpdate)
                 {
                     //若已经全部更新则无需单独更新 Site Pack
-                    if (SiteManager.CheckUpdate(parts[4]))
+                    if (SiteManager.CheckUpdate(parts[2]))
                     {
                         Dispatcher.Invoke(new VoidDel(delegate
                         {
@@ -363,16 +370,20 @@ namespace MoeLoader
                         }));
                     }
                 }
+
+                //这段代码好像是执行远程dll用的，感觉很危险，先注释掉
+                /*
                 /////////////////// ext ////////////////////
-                if (parts.Length > 3 && parts[3].Length > 0)
+                if (parts.Length > 2 && parts[2].Length > 0)
                 {
                     MyWebClient web = new MyWebClient();
-                    byte[] dllData = web.DownloadData("http://moeloader.sinaapp.com/" + parts[3]);
+                    byte[] dllData = web.DownloadData("http://moeloader.sinaapp.com/" + parts[2]);
                     //run
                     Type type = Assembly.Load(dllData).GetType("Executor.Executor", true, false);
                     MethodInfo methodInfo = type.GetMethod("Execute", Type.EmptyTypes);
                     methodInfo.Invoke(System.Activator.CreateInstance(type), null);
                 }
+                */
             }
             catch (Exception)
             {
