@@ -161,10 +161,12 @@ namespace SitePack
                     //eg. member_illust.php?mode=medium&illust_id=29561307&ref=rn-b-5-thumbnail
                     string detailUrl = anode.Attributes["href"].Value.Replace("amp;", "");
                     string previewUrl = null;
-                    if (srcType == PixivSrcType.Tag || srcType == PixivSrcType.Author)
-                        previewUrl = anode.SelectSingleNode(".//img").Attributes["src"].Value;
-                    else
-                        previewUrl = anode.SelectSingleNode(".//img").Attributes["data-src"].Value;
+                    
+                    //P站不直接把预览图地址放在src里面了，所以注释掉原来的几行判断代码。
+                    //if (srcType == PixivSrcType.Tag || srcType == PixivSrcType.Author)
+                    //    previewUrl = anode.SelectSingleNode(".//img").Attributes["src"].Value;
+                    //else
+                    previewUrl = anode.SelectSingleNode(".//img").Attributes["data-src"].Value;
 
                     if (previewUrl.Contains('?'))
                         previewUrl = previewUrl.Substring(0, previewUrl.IndexOf('?'));
@@ -294,8 +296,46 @@ namespace SitePack
         {
             if (cookie == null)
             {
-                //System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("https://www.secure.pixiv.net/login.php");
-                System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("http://www.pixiv.net/login.php");
+                //获取SessionId和post_key
+                System.Net.HttpWebRequest req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("https://accounts.pixiv.net/login?lang=zh&source=pc&view_type=page&ref=wwwtop_accounts_index");
+                var rsp = (System.Net.HttpWebResponse)req.GetResponse();
+                var cookieContainer = new System.Net.CookieContainer();
+                cookieContainer.SetCookies(rsp.ResponseUri, rsp.Headers["Set-Cookie"]);
+
+                //这里是失败的尝试……跳过就好
+                /*
+                //cookieContainer.Add(phpsessidCookie);
+                //cookieContainer.Add(p_ab_idCookie);
+                cookie = rsp.Headers.Get("Set-Cookie");
+                if (cookie == null)
+                {
+                    throw new Exception("获取初始PHPSESSID失败");
+                }
+                //Set-Cookie: PHPSESSID=3af0737dc5d8a27f5504a7b8fe427286; expires=Tue, 15-May-2012 10:05:39 GMT; path=/; domain=.pixiv.net
+                int sessionIndex = cookie.LastIndexOf("PHPSESSID");
+                string phpsessid = cookie.Substring(sessionIndex + 10, cookie.IndexOf(';', sessionIndex + 10) - sessionIndex - 9);
+                int p_ab_idIndex = cookie.LastIndexOf("p_ab_id");
+                string p_ab_id = cookie.Substring(p_ab_idIndex + 8, cookie.IndexOf(';', p_ab_idIndex + 8) - p_ab_idIndex - 8);
+                rsp.Close();
+                var phpsessidCookie = new System.Net.Cookie("p_ab_id", p_ab_id);
+                var p_ab_idCookie = new System.Net.Cookie("PHPSESSID", phpsessid);
+                */
+
+                var loginPageStream = rsp.GetResponseStream();
+                System.IO.StreamReader streamReader = new System.IO.StreamReader(loginPageStream);
+                string loginPageString = streamReader.ReadToEnd();
+                streamReader.Dispose();
+                loginPageStream.Dispose();
+                rsp.Close();
+
+                HtmlDocument loginPage = new HtmlDocument();
+                loginPage.LoadHtml(loginPageString);
+                HtmlNode postKeyNode = loginPage.DocumentNode.SelectSingleNode("//input[@name='post_key']");
+                string postKey = postKeyNode.Attributes.Where(p => p.Name == "value").Select(p => p.Value).ToList()[0];
+
+
+                //模拟登陆
+                req = (System.Net.HttpWebRequest)System.Net.WebRequest.Create("https://accounts.pixiv.net/api/login?lang=zh");
                 req.UserAgent = "Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)";
                 req.Proxy = proxy;
                 req.Timeout = 8000;
@@ -304,24 +344,31 @@ namespace SitePack
                 req.AllowAutoRedirect = false;
                 //user & pass
                 int index = rand.Next(0, user.Length);
-                string data = "mode=login&pixiv_id=" + user[index] + "&pass=" + pass[index] + "&skip=1";
+                string data = "captcha=&g_recaptcha_response=&pixiv_id=" + user[index] + "&password=" + pass[index] + "&source=pc" + "&post_key=" + postKey + "&ref=wwwtop_accounts_index" + "&return_to=http%3A%2F%2Fwww.pixiv.net%2F";
                 byte[] buf = Encoding.UTF8.GetBytes(data);
-                req.ContentType = "application/x-www-form-urlencoded";
                 req.ContentLength = buf.Length;
+                req.ContentType = "application/x-www-form-urlencoded; charset=UTF-8";
+                req.KeepAlive = true;
+                req.Referer = "https://accounts.pixiv.net/login?lang=zh&source=pc&view_type=page&ref=wwwtop_accounts_index";
+                req.Accept = "application/json, text/javascript, */*; q=0.01";
+                req.CookieContainer = cookieContainer;
+
+                
                 System.IO.Stream str = req.GetRequestStream();
                 str.Write(buf, 0, buf.Length);
                 str.Close();
-                System.Net.WebResponse rsp = req.GetResponse();
+                var getRsp = req.GetResponse();
 
                 //HTTP 302然后返回实际地址
-                cookie = rsp.Headers.Get("Set-Cookie");
+                cookie = getRsp.Headers.Get("Set-Cookie");
                 if (/*rsp.Headers.Get("Location") == null ||*/ cookie == null)
                 {
                     throw new Exception("自动登录失败");
                 }
                 //Set-Cookie: PHPSESSID=3af0737dc5d8a27f5504a7b8fe427286; expires=Tue, 15-May-2012 10:05:39 GMT; path=/; domain=.pixiv.net
                 int sessionIndex = cookie.LastIndexOf("PHPSESSID");
-                cookie = cookie.Substring(sessionIndex, cookie.IndexOf(';', sessionIndex) - sessionIndex);
+                int device_tokenIndex = cookie.LastIndexOf("device_token");
+                cookie = cookie.Substring(sessionIndex, cookie.IndexOf(';', sessionIndex) - sessionIndex) + "; " + cookie.Substring(device_tokenIndex, cookie.IndexOf(';', device_tokenIndex) - device_tokenIndex);
                 rsp.Close();
             }
         }

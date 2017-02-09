@@ -1,4 +1,13 @@
 # moe-loader-v7
+
+很喜欢这个软件，但是原作者似乎弃坑，于是不要脸的开始了维护233333
+
+接下来都会努力的更新修复各种问题。
+
+以下是原来的Readme
+
+***
+
 Automatically exported from code.google.com/p/moe-loader-v7
 
 MoeLoader是一个基于WPF的图片浏览、收集工具。
