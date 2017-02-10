@@ -366,7 +366,7 @@ namespace MoeLoader
                     {
                         Dispatcher.Invoke(new VoidDel(delegate
                         {
-                            statusText.Text = "站点定义已更新，重启程序生效";
+                            statusText.Text = "站点定义已更新，重启程序生效。\n更新内容：" + parts[3];
                         }));
                     }
                 }
@@ -878,6 +878,7 @@ namespace MoeLoader
                         {
                             Dispatcher.Invoke(new VoidDel(() =>
                             {
+                                //MessageBox.Show(this, "获取图片遇到错误: " + ex.StackTrace, "Moe Loader", MessageBoxButton.OK, MessageBoxImage.Warning);
                                 MessageBox.Show(this, "获取图片遇到错误: " + ex.Message, "Moe Loader", MessageBoxButton.OK, MessageBoxImage.Warning);
                             }));
                         }

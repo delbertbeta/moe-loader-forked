@@ -37,7 +37,7 @@ namespace MoeLoader
             /// <summary>
             /// HTML
             /// </summary>
-            HTML 
+            HTML
         }
 
         /// <summary>
@@ -65,8 +65,8 @@ namespace MoeLoader
         /// </summary>
         //public bool Stop
         //{
-            //get { return stop; }
-            //set { stop = value; }
+        //get { return stop; }
+        //set { stop = value; }
         //}
 
         /// <summary>
@@ -338,6 +338,16 @@ namespace MoeLoader
 
                 string host = url.Substring(0, url.IndexOf('/', 8));
 
+                //Konachan returns a unreal url.
+                //For example: "//konachan.com/data/preview/c6/84/c6841d0ff0ab5bc4c08422cda31a62af.jpg"
+                if (host.Contains("konachan"))
+                {
+                    preview_url = preview_url.Remove(0, 14);
+                    file_url = file_url.Remove(0, 14);
+                    sample = sample.Remove(0, 14);
+                    jpeg_url = jpeg_url.Remove(0, 14);
+                }
+
                 if (preview_url.StartsWith("/"))
                     preview_url = host + preview_url;
                 if (file_url.StartsWith("/"))
@@ -348,7 +358,7 @@ namespace MoeLoader
                     jpeg_url = host + jpeg_url;
 
                 //if (!UseJpeg)
-                    //jpeg_url = file_url;
+                //jpeg_url = file_url;
 
                 Img img = GenerateImg(file_url, preview_url, width, height, sample, created_at, tags, file_size, id, score, jpeg_url, source, url);
                 if (img != null) imgs.Add(img);
@@ -429,7 +439,7 @@ namespace MoeLoader
                     jpeg_url = host + jpeg_url;
 
                 //if (!UseJpeg)
-                    //jpeg_url = file_url;
+                //jpeg_url = file_url;
 
                 Img img = GenerateImg(file_url, preview_url, width, height, sample, created_at, tags, file_size, id, score, jpeg_url, source, url);
                 if (img != null) imgs.Add(img);

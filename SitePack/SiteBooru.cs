@@ -22,7 +22,7 @@ namespace SitePack
         /// </summary>
         protected string siteUrl;
         /// <summary>
-        /// eg. http://yande.re/tag/index.xml?limit={0}&order=count&name={1}
+        /// eg. http://yande.re/tag/index.xml?limit={0}&order=&name={1}
         /// </summary>
         protected string tagUrl;
         protected string siteName;
