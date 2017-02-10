@@ -338,15 +338,14 @@ namespace MoeLoader
 
                 string host = url.Substring(0, url.IndexOf('/', 8));
 
-                //Konachan returns a unreal url.
+                //Booru sites returns a unreal url.
                 //For example: "//konachan.com/data/preview/c6/84/c6841d0ff0ab5bc4c08422cda31a62af.jpg"
-                if (host.Contains("konachan"))
-                {
-                    preview_url = preview_url.Remove(0, 14);
-                    file_url = file_url.Remove(0, 14);
-                    sample = sample.Remove(0, 14);
-                    jpeg_url = jpeg_url.Remove(0, 14);
-                }
+
+                preview_url = preview_url.Remove(0, preview_url.IndexOf("/", 2));
+                file_url = file_url.Remove(0, file_url.IndexOf("/", 2));
+                sample = sample.Remove(0, sample.IndexOf("/", 2));
+                jpeg_url = jpeg_url.Remove(0, jpeg_url.IndexOf("/", 2));
+
 
                 if (preview_url.StartsWith("/"))
                     preview_url = host + preview_url;
